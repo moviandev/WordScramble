@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        List(0..<5) {
+        List(0..<5, id: \.self) {
             Text("Dynamic row \($0)")
             
             //            Section("Section 1") {
