@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    let people = ["Ross", "Rachel", "Monica", "Phoebe", "Joey", "Chandler"]
     var body: some View {
-        List(0..<5, id: \.self) {
-            Text("Dynamic row \($0)")
+        List(people, id: \.self) {
+            Text("\($0)")
             
             //            Section("Section 1") {
 //                Text("Static row 1")
