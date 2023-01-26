@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    let people = ["Ross", "Rachel", "Monica", "Phoebe", "Joey", "Chandler"]
     var body: some View {
-        List {
-                Text("Static row 1")
-            
-            ForEach(people, id: \.self) {
-                    Text($0)
-                }
-            
-                Text("Static row 2")
+        Text("Hello, world!")
+            .padding()
+    }
+    
+    func loadFile() {
+        if let fileURL = Bundle.main.url(forResource: "some-file", withExtension: "txt") {
+            // Here file is found
+            if let fileContent = try? String(contentsOf: fileURL) {
+                fileContent.uppercased()
+            }
         }
-        .listStyle(.grouped)
     }
 }
 
