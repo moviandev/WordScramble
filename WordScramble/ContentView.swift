@@ -13,13 +13,9 @@ struct ContentView: View {
             .padding()
     }
     
-    func loadFile() {
-        if let fileURL = Bundle.main.url(forResource: "some-file", withExtension: "txt") {
-            // Here file is found
-            if let fileContent = try? String(contentsOf: fileURL) {
-                fileContent.uppercased()
-            }
-        }
+    func test() {
+        let input = "a b c"
+        let letters = input.components(separatedBy: " ")
     }
 }
 
