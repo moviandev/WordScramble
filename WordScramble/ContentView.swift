@@ -22,7 +22,10 @@ struct ContentView: View {
                 
                 Section {
                     ForEach(usedWords, id: \.self) { word in
-                        Text(word)
+                        HStack {
+                            Image(systemName: "\(word.count).square.fill")
+                            Text(word)
+                        }
                     }
                 }
             }
@@ -36,8 +39,9 @@ struct ContentView: View {
         guard answer.count > 0 else { return }
         
         // extra validation
-        
-        usedWords.insert(answer, at: 0)
+        withAnimation {
+            usedWords.insert(answer, at: 0)
+        }
         newWord = ""
     }
 }
