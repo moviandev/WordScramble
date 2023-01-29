@@ -16,6 +16,8 @@ struct ContentView: View {
     @State private var errorMessage = ""
     @State private var showingAlert = false
     
+    @State private var score: Int = 0
+    
     var body: some View {
         NavigationView {
             List {
@@ -41,8 +43,13 @@ struct ContentView: View {
             } message: {
                 Text(errorMessage)
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Text("Score: \(score)")
+                }
+            }
             .toolbar{
-                Button("Restert game") { startGame() }
+                Button("Restart") { startGame() }
             }
         }
         
@@ -73,9 +80,12 @@ struct ContentView: View {
             return
         }
         
+        incrementScore(answer.count)
+        
         withAnimation {
             usedWords.insert(answer, at: 0)
         }
+        
         newWord = ""
     }
     
@@ -85,6 +95,8 @@ struct ContentView: View {
                 let allWords = startWords.components(separatedBy: "\n")
                 rootWord = allWords.randomElement() ?? "silkworm"
                 usedWords = [String]()
+                score = 0
+                newWord = ""
                 return
             }
         }
@@ -127,6 +139,16 @@ struct ContentView: View {
         errorTitle = title
         errorMessage = message
         showingAlert = true
+    }
+    
+    func incrementScore(_ wordLength: Int) {
+        if wordLength >= 6 {
+            score += 4
+        } else if wordLength >= 5 && wordLength < 6 {
+            score += 2
+        } else {
+            score += 1
+        }
     }
 }
 
