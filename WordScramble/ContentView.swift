@@ -42,11 +42,18 @@ struct ContentView: View {
                 Text(errorMessage)
             }
         }
+        
     }
     
     func addNewWord() {
         let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+        
         guard answer.count > 0 else { return }
+        
+        guard isValid(answer) else {
+            wordError(title: "Invalid word", message: "You have to try a word with more than 2 characteres and cannot be the same as the root word")
+            return
+        }
         
         guard isOriginal(word: answer) else {
             wordError(title: "Word used already", message: "Be more original")
@@ -62,7 +69,7 @@ struct ContentView: View {
             wordError(title: "Word not recognized", message: "You can't just make 'em up, you know!")
             return
         }
-
+        
         withAnimation {
             usedWords.insert(answer, at: 0)
         }
@@ -99,6 +106,10 @@ struct ContentView: View {
         return true
     }
     
+    func isValid(_ word: String) -> Bool {
+        !(word == rootWord || word.count < 3)
+    }
+    
     func isReal(word: String) -> Bool {
         let checker = UITextChecker()
         let range = NSRange(location: 0, length: word.utf16.count)
@@ -113,7 +124,7 @@ struct ContentView: View {
         errorMessage = message
         showingAlert = true
     }
- }
+}
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
