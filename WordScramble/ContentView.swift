@@ -32,6 +32,8 @@ struct ContentView: View {
                             Image(systemName: "\(word.count).square.fill")
                             Text(word)
                         }
+                        .accessibilityElement()
+                        .accessibilityLabel("\(word), \(word.count) letters")
                     }
                 }
             }
@@ -48,7 +50,7 @@ struct ContentView: View {
                     Text("Score: \(score)")
                 }
             }
-            .toolbar{
+            .toolbar {
                 Button("Restart") { startGame() }
             }
         }
